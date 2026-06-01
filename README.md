@@ -62,25 +62,6 @@ Current streak, longest streak, consistency (28d), weekly/monthly goal completio
 - `useMemo`/`useCallback` for derived params and handlers.
 - Paginated history (`?page=&limit=`).
 
-## Project layout
-```
-backend/
-  src/
-    config/db.js
-    middleware/{auth,validate}.js
-    models/{User,Profile,Template,Session,Schedule,Water,Reminder}.js
-    routes/*.routes.js
-    controllers/*.controller.js
-    services/{mailer,scheduler}.js
-    server.js
-frontend/
-  src/
-    api/client.js
-    components/{Layout,Loading,charts/*}.jsx
-    pages/{Auth,Dashboard,History,Templates,Schedule,Session,Analytics,Profile,Reminders}.jsx
-    store/{index,slices/*}.js
-    styles/{theme,ui}.js
-    App.jsx  main.jsx
-```
 
-See `PROMPT.md` for the reusable prompt that generates this exact app.
+
+
