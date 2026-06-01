@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from '../store';
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://fitbuddy2-o.onrender.com' });
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://fitbuddy2-o.onrender.com/api' });
 api.interceptors.request.use(cfg => {
   const t = store.getState().auth?.token;
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
