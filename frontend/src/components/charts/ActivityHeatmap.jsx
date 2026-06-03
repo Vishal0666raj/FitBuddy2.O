@@ -12,7 +12,7 @@ const Cell = styled.div`
   @media (min-width:640px){ width:16px; height:16px; }
 `;
 function shade(v){
-  if (!v) return 'rgba(255,255,255,.05)';
+  if (!v) return 'rgba(200,200,200,.3)';
   if (v < 1) return 'rgba(255,106,61,.25)';
   if (v < 2) return 'rgba(255,106,61,.5)';
   if (v < 3) return 'rgba(255,106,61,.75)';
