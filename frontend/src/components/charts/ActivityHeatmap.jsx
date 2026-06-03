@@ -19,18 +19,20 @@ function shade(v){
   return '#ff3d7f';
 }
 function ActivityHeatmap({ since, map, weeks = 17 }){
-  console.log('ActivityHeatmap received:', { since, map, weeks });
   const cells = useMemo(() => {
-    const start = since ? new Date(since) : (() => { const d=new Date(); d.setDate(d.getDate()-weeks*7); return d; })();
-    // Align to Sunday
-    const d0 = new Date(start); d0.setDate(d0.getDate() - d0.getDay());
+    const today = new Date(); today.setHours(0,0,0,0);
     const total = weeks * 7;
+    // Calculate end date as today, start date as today - (total - 1) days
+    const endDate = new Date(today);
+    const startDate = new Date(today); startDate.setDate(startDate.getDate() - total + 1);
+    // Align to Sunday
+    const d0 = new Date(startDate); d0.setDate(d0.getDate() - d0.getDay());
     return Array.from({length: total}).map((_, i) => {
-      const d = new Date(d0); d.setDate(d.getDate()+i);
+      const d = new Date(d0); d.setDate(d0.getDate()+i);
       const k = d.toISOString().slice(0,10);
       return { k, v: map?.[k] || 0 };
     });
-  }, [since, map, weeks]);
+  }, [map, weeks]);
   return (
     <Wrap>
       <Grid>
