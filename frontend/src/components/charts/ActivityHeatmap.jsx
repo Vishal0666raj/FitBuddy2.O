@@ -24,12 +24,14 @@ function ActivityHeatmap({ since, map, weeks = 17 }){
     const total = weeks * 7;
     const startDate = new Date(today); startDate.setDate(startDate.getDate() - total + 1);
     const d0 = new Date(startDate); d0.setDate(d0.getDate() - d0.getDay());
-    return Array.from({length: total}).map((_, i) => {
+    const result = Array.from({length: total}).map((_, i) => {
       const d = new Date(d0.getTime()); 
       d.setDate(d.getDate() + i);
       const k = d.toISOString().slice(0,10);
       return { k, v: map?.[k] || 0 };
     });
+    console.log('Heatmap cells generated:', result.length, 'First:', result[0], 'Last:', result[result.length-1], 'Map keys:', Object.keys(map || {}));
+    return result;
   }, [map, weeks]);
   return (
     <Wrap>
