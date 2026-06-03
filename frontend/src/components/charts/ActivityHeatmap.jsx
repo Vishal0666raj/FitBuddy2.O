@@ -8,8 +8,8 @@ const Grid = styled.div`
   gap:4px; min-width: max-content;
 `;
 const Cell = styled.div`
-  width:16px; height:16px; border-radius:3px; background:${p=>p.$c}; border: 1px solid rgba(0,0,0,.1);
-  @media (min-width:640px){ width:18px; height:18px; }
+  width:14px; height:14px; border-radius:3px; background:${p=>p.$c};
+  @media (min-width:640px){ width:16px; height:16px; }
 `;
 function shade(v){
   if (!v) return 'rgba(200,200,200,.3)';
@@ -45,7 +45,7 @@ function ActivityHeatmap({ since, map, weeks = 17 }){
   return (
     <Wrap>
       <Grid>
-        {cells && cells.length > 0 ? cells.map(c => <Cell key={c.k} title={`${c.k}: ${c.v.toFixed(1)}`} $c={shade(c.v)}/>) : <div>No cells</div>}
+        {cells.map(c => <Cell key={c.k} title={`${c.k}: ${c.v.toFixed(1)}`} $c={shade(c.v)}/>)}
       </Grid>
     </Wrap>
   );
