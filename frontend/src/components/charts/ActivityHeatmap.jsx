@@ -19,6 +19,7 @@ function shade(v){
   return '#ff3d7f';
 }
 function ActivityHeatmap({ since, map, weeks = 17 }){
+  console.log('ActivityHeatmap received:', { since, map, weeks });
   const cells = useMemo(() => {
     const start = since ? new Date(since) : (() => { const d=new Date(); d.setDate(d.getDate()-weeks*7); return d; })();
     // Align to Sunday
