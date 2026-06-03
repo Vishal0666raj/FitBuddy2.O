@@ -40,11 +40,21 @@ export default function Dashboard(){
   const profile = useSelector(s => s.profile.data);
   const water = useSelector(s => s.water.items);
 
-  useEffect(() => {
-    dispatch(fetchDashboard()); dispatch(fetchHeatmap(119));
+  const fetchData = () => {
+    dispatch(fetchDashboard()); 
+    dispatch(fetchHeatmap(119));
     dispatch(fetchProfile());
     const today = new Date().toISOString().slice(0,10);
     dispatch(fetchWater({ from: today, to: today }));
+  };
+
+  useEffect(() => {
+    fetchData();
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') fetchData();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, [dispatch]);
 
   const todayMl = useMemo(() => {
