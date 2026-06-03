@@ -8,8 +8,8 @@ const Grid = styled.div`
   gap:4px; min-width: max-content;
 `;
 const Cell = styled.div`
-  width:14px; height:14px; border-radius:3px; background:${p=>p.$c};
-  @media (min-width:640px){ width:16px; height:16px; }
+  width:16px; height:16px; border-radius:3px; background:${p=>p.$c}; border: 1px solid rgba(0,0,0,.1);
+  @media (min-width:640px){ width:18px; height:18px; }
 `;
 function shade(v){
   if (!v) return 'rgba(200,200,200,.3)';
