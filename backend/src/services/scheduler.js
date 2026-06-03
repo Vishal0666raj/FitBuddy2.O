@@ -7,9 +7,20 @@ const User = require('../models/User');
 const Water = require('../models/Water');
 const { sendMail } = require('./mailer');
 
-function ymd(d){ return new Date(d).toISOString().slice(0,10); }
+function ymd(d){
+  const dt = new Date(d);
+
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2,'0');
+  const day = String(dt.getDate()).padStart(2,'0');
+
+  return `${y}-${m}-${day}`;
+}
 
 async function tick() {
+  console.log(
+  `Checking reminders at ${new Date().toLocaleString()}`
+);
   const now = new Date();
   const utcMin = now.getUTCHours()*60 + now.getUTCMinutes();
   const reminders = await Reminder.find({ $or: [{ email_enabled: true }, { water_enabled: true }] });
@@ -79,6 +90,7 @@ async function tick() {
 
 exports.startScheduler = () => {
   // Every 5 minutes — coarse but sufficient
-  cron.schedule('*/5 * * * *', () => { tick().catch(e => console.error('scheduler', e)); });
-  console.log('Scheduler started (*/5min)');
+  cron.schedule('* * * * *', () => {
+  tick().catch(e => console.error('scheduler', e));
+});
 };
