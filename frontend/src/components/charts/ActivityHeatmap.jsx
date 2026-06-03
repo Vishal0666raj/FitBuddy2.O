@@ -45,7 +45,7 @@ function ActivityHeatmap({ since, map, weeks = 17 }){
   return (
     <Wrap>
       <Grid>
-        {cells.map(c => <Cell key={c.k} title={`${c.k}: ${c.v.toFixed(1)}`} $c={shade(c.v)}/>)}
+        {cells && cells.length > 0 ? cells.map(c => <Cell key={c.k} title={`${c.k}: ${c.v.toFixed(1)}`} $c={shade(c.v)}/>) : <div>No cells</div>}
       </Grid>
     </Wrap>
   );
